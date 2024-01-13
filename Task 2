@@ -1,0 +1,47 @@
+import java.util.Scanner;
+public class Grade
+{
+    public static void main(String []args)
+    {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter the number of subjects: ");
+        int sno = s.nextInt();
+        int totalMarks = 0;
+        for(int i = 1; i <= sno; i++)
+        {
+            System.out.println("Enter marks of subject "+i+": ");
+            int marks = s.nextInt();
+            totalMarks += marks;
+        } 
+        System.out.println("Total Marks: "+totalMarks);
+
+        double average = (double) totalMarks / sno;
+        System.out.println("Average Marks: "+ average);
+
+        char Grade = calculateGrade(average);
+        System.out.println("Grade obtained: "+ Grade);   
+    }
+    private static char calculateGrade(double average)
+    {
+        if(average >= 90)
+        {
+            return 'A';
+        }
+        else if(average >= 80)
+        {
+            return 'B';
+        }
+        else if(average >= 70)
+        {
+            return 'C';
+        }
+        else if(average >= 60)
+        {
+            return 'D';
+        }
+        else
+        {
+            return 'F';
+        }
+    }
+}
