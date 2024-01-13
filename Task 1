@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class NumberGame
+{
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+
+        while (true) 
+        {
+            playGame(s);
+            System.out.print("Do you want to play again? (yes/no): ");
+            String playAgain = s.next().toLowerCase();
+            if (!playAgain.equals("yes"))
+            {
+                System.out.println("Thanks for playing! Goodbye!");
+                break;
+            }
+        }
+        
+        s.close();
+    }
+
+    private static void playGame(Scanner s) {
+        // Step 1: Generate a random number within the specified range
+        int lowerLimit = 1;
+        int upperLimit = 100;
+        int secretNumber = (int) (Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
+
+        // Additional details
+        int maxAttempts = 5;
+        int roundsPlayed = 0;
+        int score = 0;
+
+        while (true) {
+            // Step 2: Prompt the user to enter their guess
+            System.out.print("Guess the number between " + lowerLimit + " and " + upperLimit + ": ");
+            int userGuess = s.nextInt();
+
+            // Step 3: Compare the user's guess and provide feedback
+            if (userGuess == secretNumber) {
+                System.out.println("Congratulations! You guessed the correct number (" + secretNumber + ")!");
+                score++;
+                break;
+            } else if (userGuess < secretNumber) {
+                System.out.println("Too low! Try again.");
+            } else {
+                System.out.println("Too high! Try again.");
+            }
+
+            // Additional detail: Limit the number of attempts
+            maxAttempts--;
+            if (maxAttempts == 0) {
+                System.out.println("Sorry, you've run out of attempts. The correct number was " + secretNumber + ".");
+                break;
+            }
+        }
+
+        // Additional details: Allow multiple rounds
+        System.out.print("Do you want to play another round? (yes/no): ");
+        String playAgain = s.next().toLowerCase();
+        if (playAgain.equals("yes")) {
+            playGame(s);
+        } else {
+            System.out.println("Thanks for playing! Your total score is " + score + " point" + (score == 1 ? "" : "s") + ".");
+        }
+    }
+}
